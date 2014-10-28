@@ -1,0 +1,8 @@
+{
+  "bind": "127.0.0.1",
+  "port": 1470,
+  "server": "127.0.0.1:1471",
+  "buffer": "/tmp/buffer.log",
+  "buffer_size": 1024,
+  "truncate": 3600
+}
