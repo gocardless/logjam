@@ -17,7 +17,7 @@ Usage
 
     {
       "bind": "127.0.0.1",         // interface on host to bind (0.0.0.0 for all)
-      "port": 1470,               // port to listen on locally
+      "port": 1470,                // port to listen on locally
       "server": "10.1.1.10:1470",  // logstash server to forward to
       "buffer": "/tmp/buffer.log", // file to use for on-disk buffer
       "buffer_size": 1-24,         // entries to keep in memory buffer
@@ -26,5 +26,5 @@ Usage
 
 ### Execution
 
-    $ logjam --config
+    $ logjam --config config.json
 
