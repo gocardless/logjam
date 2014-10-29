@@ -58,18 +58,18 @@ func (r *Receiver) ListenAndServe() error {
 	return nil
 }
 
-func (r *Receiver) ListenToFile(path string) error {
+// tail a file on disk
+func (r *Receiver) TailFile(path string) (*tail.Tail, error) {
 	t, err := tail.TailFile(path, tail.Config{Follow: true, ReOpen: true})
-	if err != nil {
-		return err
-	}
+	return t, err
+}
 
+// listen for tail events as if they were entries on the network socket
+func (r *Receiver) ListenToTail(t *tail.Tail) {
 	for line := range t.Lines {
 		m := Entry{Message: line.Text}
 		r.messages <- m.ToJSON()
 	}
-
-	return nil
 }
 
 // write entries on messages channel to filename

@@ -19,9 +19,8 @@ func main() {
 	}
 
 	r := NewReceiver(config.Bind, config.Port, config.BufferSize)
-	s := NewShipper(config.Server)
 
-	err = s.Dial()
+	s, err := NewShipper("udp", config.Server)
 	if err != nil {
 		log.Fatalf("Shipper: Error: %s\n", err)
 	}
@@ -33,7 +32,12 @@ func main() {
 
 	// Ship Files
 	for _, path := range config.Files {
-		go r.ListenToFile(path)
+		t, err := r.TailFile(path)
+		if err != nil {
+			log.Fatalf("Tail: Error: %s\n", err)
+		}
+
+		go r.ListenToTail(t)
 	}
 
 	// Ship Socket

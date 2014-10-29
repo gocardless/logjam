@@ -10,22 +10,17 @@ import (
 )
 
 type Shipper struct {
-	Addr string // remote host
-
-	client net.Conn // remote log server connection
+	net.Conn
 }
 
 // create a new shipper client
-func NewShipper(addr string) Shipper {
-	return Shipper{
-		Addr: addr,
+func NewShipper(proto string, addr string) (*Shipper, error) {
+	conn, err := net.Dial(proto, addr)
+	if err != nil {
+		return nil, err
 	}
-}
 
-// connect to server
-func (s *Shipper) Dial() (err error) {
-	s.client, err = net.Dial("udp", s.Addr)
-	return
+	return &Shipper{conn}, nil
 }
 
 // write to socket with exponential backoff in milliseconds
@@ -33,7 +28,7 @@ func (s *Shipper) WriteWithBackoff(p []byte, initial int) {
 	var timeout time.Duration = time.Duration(initial) * time.Millisecond
 
 	for {
-		_, err := s.client.Write(p)
+		_, err := s.Write(p)
 		if err != nil {
 			timeout = timeout * 2
 			time.Sleep(timeout)
