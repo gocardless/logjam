@@ -16,12 +16,13 @@ type Config struct {
 }
 
 // read config file
-func ReadConfigFile(path string) (cfg Config, err error) {
+func ReadConfigFile(path string) (*Config, error) {
 	file, err := ioutil.ReadFile(path)
 	if err != nil {
-		return
+		return nil, err
 	}
 
+	var cfg Config
 	err = json.Unmarshal(file, &cfg)
-	return
+	return &cfg, err
 }
