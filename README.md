@@ -25,7 +25,7 @@ Usage
       "port": 1470,                // port to listen on locally
       "server": "10.1.1.10:1470",  // logstash server to forward to
       "buffer": "/tmp/buffer.log", // file to use for on-disk buffer
-      "buffer_size": 1-24,         // entries to keep in memory buffer
+      "buffer_size": 1024,         // entries to keep in memory buffer
       "truncate": 3600             // clean out disk buffer every x seconds
     }
 
