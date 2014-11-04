@@ -33,3 +33,8 @@ Usage
 
     $ logjam --config config.json
 
+Pipeline
+--------
+
+![logjam pipeline](https://i.imgur.com/4e5sowg.png)
+
