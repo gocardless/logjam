@@ -8,7 +8,7 @@ import (
 type Config struct {
 	Bind           string   `json:"bind"`        // interface to bind to (0.0.0.0 for all)
 	Port           int      `json:"port"`        // listen port
-	Server         string   `json:"server"`      // remove server to publish logs to
+	Server         string   `json:"server"`      // remote server to publish logs to
 	DiskBufferPath string   `json:"buffer"`      // path for disk buffer
 	BufferSize     int      `json:"buffer_size"` // queue length of memory bufer
 	TruncatePeriod int      `json:"truncate"`    // cleanup buffer every x seconds
