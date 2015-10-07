@@ -2,7 +2,7 @@ Logjam
 ------
 
 Logjam is a log forwarder designed to listen on a local port, receive log entries over UDP, and forward
-these messages on to a log collecton server (such as logstash).
+these messages on to a log collection server (such as logstash).
 
 The motivation for logjam was a move to containerising our applications, and a need to get logs from these
 applications out of the containers. We configure logjam to listen on the `docker0` (172.16.42.1) interface which is
